@@ -1,0 +1,24 @@
+<div class="navbar">
+  <div class="navbarName">
+    <a href="/">AnswerSeek</a>
+  </div>
+
+    <form class="navbarSearch" method="GET" action="{% url 'searchPost' %}">
+      <input name="qr" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
+
+  <div class="navbarAuth">
+    {% if user.is_authenticated %}
+      <div style="color: #fff;">{{user}}</div>
+      <a href="{% url 'signout' %}">sign out</a>
+    {% else %}
+      <a href="{% url 'signin' %}">login</a>
+      <a href="{% url 'signup' %}">sign up</a>
+    {% endif %}
+      <a href="{% url 'post' %}">Ask Question?</a>
+  </div>
+</div>
+
+
+       

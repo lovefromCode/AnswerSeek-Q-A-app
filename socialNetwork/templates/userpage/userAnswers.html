@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+       <div class="section">
+         <div class="section_userAns">
+            <div id="Answers">
+              <div class="post__Question">
+                <div>Question: {{posts.question}} <span> by {{posts.user}}</span> </div> 
+              </div>  
+              <div class="post__Answers">
+                <div class="yourAnswer">
+                  <div class="yourResponse">
+                    <div class="yourAnswerHead">Your Answer</div>
+                    {% if posts.answer %}
+                    <div class="yourAnswerBody"> {{posts.answer}} </div>
+                    {% else %}
+                    <div style="padding: 20px;">You can post your answer to know other's opinion.</div>
+                    {% endif %}
+                  </div> 
+                </div>
+                
+
+                <div class="BTNs">
+
+                  <div class="Like_Dislike_Btns ">
+
+                    <!-- upvotes -->
+                    {% if user.is_authenticated %}
+                    <div class="upvote">
+                      <form action="{% url 'like' posts.id %}" method="POST">
+                        {% csrf_token %}
+                          {% if isLiked %}
+                            <!-- if somebody already liked it then we want to unlike. -->
+                            <button type="submit" name="post_id" value="{{posts.id}}" style="color: #1f327e; font-size: 20px;"> <i class="fas fa-thumbs-up"></i> </button>
+                          {% else %}
+                            <button type="submit" name="post_id" value="{{posts.id}}" style="font-size: 20px; color: gray;"> <i class="far fa-thumbs-up"></i> </button>
+                          {% endif %}
+                            <span style="color: gray;">{{posts.total_likes}}</span>
+                          </form>
+                        </div>
+                        
+                        {% else %}
+                          <div class="upvote">
+                            <a type="button" href="#" style="font-size: 20px; color: gray;"> <i class="far fa-thumbs-up"></i> </a>
+                            <span style="color: gray;">{{posts.total_likes}}</span>
+                          </div>
+                    {% endif %}
+  
+                      <!-- downvotes -->
+                    {% if user.is_authenticated %}
+                    <div class="downvote">
+                      <form action="{% url 'dislike' posts.id %}" method="POST">
+                        {% csrf_token %}
+                          {% if isDisliked %}
+                            <!-- if somebody already liked it then we want to unlike. -->
+                            <button type="submit" name="post_id" value="{{posts.id}}" style="color: #1f327e; font-size: 20px;"> <i class="fas fa-thumbs-down"></i> </button>
+                          {% else %}
+                            <button type="submit" name="post_id" value="{{posts.id}}" style="font-size: 20px; color: gray;"> <i class="far fa-thumbs-down"></i> </button>
+                          {% endif %}
+                            <span style="color: gray;">{{posts.total_dislikes}}</span>
+                          </form>
+                        </div>
+                        
+                        {% else %}
+                          <div class="upvote">
+                            <a type="button" href="#" style="font-size: 22px; color: gray;"> <i class="far fa-thumbs-up"></i> </a>
+                            <span style="color: gray;">{{posts.total_dislikes}}</span>
+                          </div>
+                    {% endif %}
+  
+  
+                
+                  </div>
+
+                  <div class="deleteBtn">
+                    {% if posts.user == request.user %}
+                      <a href="{% url 'delPost' posts.id %}"> <i class="fas fa-trash"></i> </a> 
+                    {% else %}
+
+                    {% endif %}
+                  </div>
+
+                </div>
+                
+
+               
+
+            <!-- Modal starts -->
+                <div class="modal fade" id="ansModal" tabindex="-1" aria-labelledby="ansModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="ansModal">Your Answer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="{% url 'answerPost' posts.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="myans" id="myans">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <!-- Modal ends -->
+
+                <div class="addResponsebtn">
+                  <div style="font-weight: bolder; font-size: 22px;" class="info-1">Other's Answers</div>
+                  {% if user.is_authenticated %}
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#ansModal">
+                        Add your answer
+                    </a>
+                  {% else %}
+                    <a href="{% url 'signin' %}"> login to answer </a>
+                  {% endif %}
+                </div>
+                
+
+                <div class="otherAnswer">
+                    {% if answers %}
+                    {% for ans in answers %}
+                    <div class="otherResponse">
+                        <div class="otherAnswerHead">{{ans.user}} <span style="font-size: 11px; color: gray; padding-left: 13px;"> {{ans.created_at | naturaltime}}</span> </div>
+                        <div class="otherAnswerBody">{{ans.answers}}</div>  
+                    </div> 
+                    {% endfor %}
+                    {% else %}
+                       <div style="border: 2px solid #e2e4e8; padding: 10px; border-radius: 10px;">
+                           There is no answers yet.
+
+                       </div> 
+                    {% endif %}
+                </div>
+
+              </div> 
+
+              <div class="post__Comments">
+                <div class="addComment">
+                  <div style="font-weight: bolder; font-size: 22px;" class="info-2">Comments</div>
+                  {% if user.is_authenticated %}
+                  <a type="button" data-bs-toggle="modal" data-bs-target="#commentModal">
+                    Add your comment
+                  </a>
+                  {% else %}
+                  <a href="{% url 'signin' %}"> login to comment </a>
+                  {% endif %}
+                </div>
+                
+                <!-- Modal starts -->
+                <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="ansModal">Your Comment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="{% url 'commentPost' posts.id %}" method="POST">
+                            {% csrf_token %}
+                            <label for="comment" class="form-label">comment here</label>
+                            <input type="text" class="form-control" name="comment" id="comment">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <!-- Modal ends -->
+
+                <div class="allComments">
+                    {% if comments %}
+                    {% for comment in comments %}
+                        <div class="single__comment">
+                            <div class="comment_body">
+                                <div class="user">{{comment.user}}</div>
+                                <div class="text">{{comment.comment}}</div>  
+                            </div>
+                            <div class="comment_timestamp">{{comment.created_at | naturaltime}}</div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        no comments yet.
+                    {% endif %}
+                </div>
+              </div>  
+
+            </div>
+
+
+
+
+              <div class="recommendations">
+                <h3> Recommended Posts </h3> 
+
+                  <div class="post">
+                    <div class="postBody">
+                      <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
+                      <button>see post</button>
+                    </div>
+                  </div>
+                
+                  <div class="post">
+                    <div class="postBody">
+                      <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
+                      <button>see post</button>
+                    </div>
+                  </div>
+
+              </div>
+         </div>
+       </div>
+              
+            </div>
+
+
+
+
+
+
+       
+
+       
+    </div>
+{% endblock %}

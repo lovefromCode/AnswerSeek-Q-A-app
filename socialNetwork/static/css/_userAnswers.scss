@@ -1,0 +1,342 @@
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100vw;
+  
+  .section_userAns {
+    width: 1140px;
+    display: flex;
+    justify-content: center;
+
+      #Answers {
+        width: 60%;
+
+        .post__Question {
+          width: 100%;
+          margin-top: 20px;
+          div {
+            font-weight: bolder;
+            font-size: 23px;
+            padding: 0 0 15px 10px;
+            span {
+              font-size: 18px;
+            }
+          }
+          min-height: 60px;
+        }
+
+        .post__Answers {
+          .yourAnswer {
+            width: 98%;
+            min-width: 98%;
+          }
+          .yourResponse {
+            border: 2px solid #e2e4e8;
+            border-radius: 10px;
+            .yourAnswerHead {
+              height: 40px;
+              width: 100%;
+              font-weight: bolder;
+              display: flex;
+              align-items: center;
+              padding-left: 20px;
+              border-bottom: 1px solid #e2e4e8;
+            }
+            .yourAnswerBody {
+              min-height: 100px;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              padding: 10px 20px;
+            }
+          }
+
+        .BTNs {
+          display: flex;
+          .Like_Dislike_Btns {
+            width: 80%;
+            height: 50px;
+            padding: 10px;
+            display: flex;
+
+            .upvote {
+              width: 70px;
+              display: flex;
+              justify-content: space-evenly;
+              align-items: center;
+            }
+            .downvote {
+              width: 70px;
+              display: flex;
+              justify-content: space-evenly;
+              align-items: center;
+            }
+
+            button {
+              border: 2px solid #f2f3f3;
+            }
+          }
+
+          .deleteBtn {
+            width: 18%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            a {
+              color: rgb(154, 30, 30);
+            }
+          }
+        }
+          .addResponsebtn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 15px 25px 0;
+            a {
+              color: #fafafa;
+              margin-left: 30px;
+              border: 2px solid #fff;
+              border-radius: 8px;
+              background: linear-gradient(#027dbc, #222f3e);
+              height: 40px;
+              width: 180px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-decoration: none;
+            }
+          }
+
+          .otherAnswer {
+            width: 98%;
+            display: flex;
+            flex-direction: column;
+            margin: 20px 0;
+
+            .otherResponse {
+              border: 2px solid #e2e4e8;
+              border-radius: 10px;
+              margin-bottom: 20px;
+              .otherAnswerHead {
+                height: 40px;
+                width: 100%;
+                font-weight: bolder;
+                display: flex;
+                align-items: center;
+                padding-left: 20px;
+                border-bottom: 1px solid #e2e4e8;
+              }
+              .otherAnswerBody {
+                min-height: 100px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding-left: 20px;
+              }
+            }
+          }
+        }
+
+        .post__Comments {
+          .addComment {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 15px 25px 0;
+            a {
+              color: #fafafa;
+              margin-left: 30px;
+              border: 2px solid #fff;
+              border-radius: 8px;
+              background: linear-gradient(#027dbc, #222f3e);
+              height: 40px;
+              width: 180px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-decoration: none;
+            }
+          }
+
+          .allComments {
+            width: 98%;
+            border: 2px solid #e2e4e8;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+
+            .single__comment {
+              display: flex;
+              flex-direction: column;
+              .comment_body {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding: 10px 10px;
+                .user {
+                  padding-right: 20px;
+                  font-size: 14px;
+                  font-weight: bold;
+                  border-right: 1px solid #e2e4e8;
+                }
+                .text {
+                  padding-left: 20px;
+                  font-size: 14px;
+                }
+              }
+              .comment_timestamp {
+                text-align: end;
+                padding-right: 20px;
+                font-size: 10px;
+                color: gray;
+              }
+              border-bottom: 1px solid #e2e4e8;
+            }
+          }
+        }
+      }
+
+      .recommendations {
+        width: 35%;
+        // border: 1px solid red;
+        margin: 0 10px;
+    
+        h3 {
+          margin: 15px 0 20px 0;
+          padding-left: 20px;
+        }
+        .post {
+          // border: 1px solid grey;
+          width: 100%;
+          background-color: #fff;
+          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+    
+          .postHeader {
+            height: 30px;
+            span {
+              margin-left: 30px;
+            }
+          }
+          .postBody {
+            width: 100%;
+            min-height: 100px;
+            border-bottom: 1px solid #ebeded;
+            padding: 1px 10px 10px 20px;
+    
+            div {
+              margin: 10px;
+            }
+            button {
+              color: #fafafa;
+              margin-left: 5px;
+              border: 2px solid #fff;
+              border-radius: 20px;
+              background: linear-gradient(#027dbc, #222f3e);
+              // background: linear-gradient(#F99653, #E15500);
+              height: 30px;
+              width: 120px;
+            }
+          }
+        }
+      }
+    
+  }
+}
+
+@media all and (max-width: 960px) {
+  .recommendations {
+    display: none  !important;
+  }
+}
+
+@media all and (max-width: 710px) {
+
+  .section {
+    .section_userAns {
+      #Answers {
+        .post__Question {
+          div {
+            font-size: 18px;
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .post__Answers {
+          .yourAnswer {
+          .yourResponse {
+            .yourAnswerHead {
+              font-size: 16px;
+            }
+            .yourAnswerBody {
+              font-size: 14px;
+            }
+          }
+        }
+
+          .addResponsebtn {
+            .info-1 {
+              font-size: 18px !important;
+            }
+            a {
+              font-size: 12px;
+              height: 35px;
+              width: 140px;
+            }
+          }
+
+          .otherAnswer {
+            .otherResponse {
+              .otherAnswerHead {
+                font-size: 16px;
+              }
+              .otherAnswerBody {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+
+        .post__Comments {
+          .addComment {
+            .info-2 {
+              font-size: 18px !important;
+            }
+            a {
+              height: 35px;
+              width: 140px;
+              font-size: 12px;
+            }
+          }
+
+          .allComments {
+            .single__comment {
+              .comment_body {
+                .user {
+                  font-size: 11px;
+                }
+                .text {
+                  font-size: 12px;
+                }
+              }
+              .comment_timestamp {
+                font-size: 8px;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  .recommendations {
+    display: none  !important;
+  }
+
+}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+    social network
+{% endblock %}
+
+{% block content %}
+
+    <div class="section">
+      <div class="section_home">
+       <div class="allposts">
+        <h3>Posts</h3>
+            {% for post in posts %}
+                <div class="post">
+                  <div class="postHeader"> 
+                    <a href="{% url 'user_profile' post.user %}">{{post.user}}</a>
+                  </div>
+                  <div class="postBody">
+                    <div style="font-weight: bolder;">Question: {{post.question|truncatechars:100}}</div>
+                    {% if post.answer %}
+                    <div>Answer: {{post.answer|truncatechars:200}}</div>
+                    {% else %}
+                    
+                    {% endif %}
+                  </div>
+                  <div class="postFooter">
+                    <a href="{% url 'userStory' post.id %}">More Answers ??</a>
+                  </div>
+                </div>
+            {% endfor %}
+            </div>
+            
+            <!-- recommendations -->
+            
+            <div class="recommendations">
+              <h3> Recommended Posts </h3> 
+
+                <div class="post">
+                  <div class="postBody">
+                    <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
+                    <button>see post</button>
+                  </div>
+                </div>
+              
+                <div class="post">
+                  <div class="postBody">
+                    <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
+                    <button>see post</button>
+                  </div>
+                </div>
+
+            </div>
+      </div>      
+        </div>
+
+{% endblock %}
+
+
+{% block script %}
+   <script>
+    
+   </script>   
+{% endblock %}

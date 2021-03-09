@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="postWriteBody">
+        <div class="logo">AnswerSeek</div>
+          <form class="posting__form" method="POST" action="{% url 'postDone' %}" enctype="multipart/form-data">
+              {% csrf_token %}
+
+            <div>
+                    <label for="question">Your Question</label>
+                    <input name="question" type="text" id="question" placeholder="Enter your Question">
+            </div>
+            <div>
+                    <label for="answer">Answer (if you want to know others opinion about your answer)</label>
+                    <textarea name="answer" type="text" id="answer" rows="6" placeholder="Answer if you want"></textarea>
+            </div>
+            <button type="submit">Post</button>
+          </form>
+</div>
+{% endblock %}

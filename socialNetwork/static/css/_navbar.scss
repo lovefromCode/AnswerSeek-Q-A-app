@@ -1,0 +1,112 @@
+.navbar {
+  background-color: #232f3e;
+  font-family: sans-serif;
+  padding: 0 20px;
+  color: #fff;
+  height: 55px;
+
+  .navbarName {
+    width: 13%;
+    padding-left: 50px;
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+  .navbarSearch {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      width: 70%;
+      height: 35px;
+      padding: 0 20px;
+      outline: none;
+    }
+    button {
+      color: #fafafa;
+      font-size: 16px;
+      border: 2px solid #232f3e;
+      border-radius: 4px;
+      background: linear-gradient(#f99653, #e15500);
+      height: 37px;
+      width: 110px;
+    }
+  }
+  .navbarAuth {
+    width: 32%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0 20px;
+    }
+    
+  }
+}
+
+@media all and (max-width: 1070px) {
+  .navbar {
+    .navbarName {
+      padding-left: 0;
+      width: 15%;
+    }
+    .navbarSearch {
+      width: 55%;
+    }
+    .navbarAuth {
+      width: 30%;
+      a {
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 940px) {
+  .navbar {
+    .navbarName {
+      font-size: 14px;
+      width: 15%;
+    }
+    .navbarSearch {
+      width: 50%;
+     button {
+       width: 80px;
+       font-size: 14px;
+      }
+    }
+    .navbarAuth {
+      font-size: 14px;
+      width: 35%;
+      a {
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 745px) {
+  .navbar {
+    .navbarName {
+      width: 15%;
+      font-size: 13px;
+    }
+    .navbarSearch {
+      width: 45%;
+      button {
+        display: none;
+      }
+    }
+    .navbarAuth {
+      width: 35%;
+      font-size: 13px;
+      a {
+        padding: 0 10px;
+      }
+    }
+  }
+}

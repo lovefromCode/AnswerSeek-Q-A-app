@@ -1,0 +1,83 @@
+.postWriteBody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+    .logo {
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .posting__form {
+        padding: 20px 0;
+        width: 40%;
+        div {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 0;
+            label {
+                font-size: 14px;
+                padding-bottom: 4px;
+            }
+            input {
+                height: 45px;
+                outline: none;
+                padding: 0 20px;
+                font-size: 15px;
+                &::placeholder {
+                    color: grey;
+                    font-size: 14px;
+                }
+            }
+            textarea {
+                padding: 10px 20px;
+            }
+        }
+
+        button {
+            color: #FAFAFA;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            background:#222F3E;
+            height: 45px;
+            width: 250px;
+        }
+    }
+   
+}
+
+@media all and (max-width: 1140px) {
+    .postWriteBody {
+        .logo {
+            font-size: 30px;
+        }
+        .posting__form {
+            width: 50%;
+            div {
+                label {
+                    font-size: 12px;
+                    padding-bottom: 3px;
+                }
+                input {
+                    height: 40px;
+                    font-size: 12px;
+                    &::placeholder {
+                        font-size: 12px;
+                    }
+                }
+                textarea {
+                    font-size: 12px;
+                }
+            }
+    
+            button {
+                height: 35px;
+                width: 150px;
+                font-size: 13px;
+            }
+        }
+       
+    }
+}

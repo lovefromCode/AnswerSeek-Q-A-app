@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="body_signup">
+    <div class="logo">AnswerSeek</div>
+    <form class="signup__form" method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div>
+            <label for="username">What should we call you?</label>
+            <input name="username" type="text" id="username" placeholder="Enter your profile name">
+        </div>
+        <div>
+            <label for="email">What's your email?</label>
+            <input name="email" type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div>
+            <label for="password">Create a password</label>
+            <input name="password" type="password" id="password" placeholder="Create your password">
+        </div>
+        <div>
+            <label for="confirm_password">Confirm your Password</label>
+            <input name="confirm_password" type="password" id="confirm_password" placeholder="Enter your password again">
+        </div>
+        
+        <button type="submit">Signup</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    
+{% endblock %}
+
+{% block content %}
+
+      <div class="profile">
+          <div class="profile__pic">
+            <img src="{{user_obj.userImage.url}}" alt="pic">
+          </div>
+          <div class="profile__details">
+              <div style="display: flex; justify-content: center; align-items: center; padding: 5px 0;">
+                <span style="font-weight: 500; font-size: 20px;"> {{user_obj.user}} </span> 
+                <!-- Button trigger modal -->
+                <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  edit profile
+                </a>
+              </div> 
+            <h6>{{user_obj.bio}}</h6>
+            <h6>{{total_post}} posts</h6>
+          
+          </div>
+        
+      </div>
+      <hr>
+
+        <!-- Modal start -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit your profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="{% url 'editProfile' user_obj.user %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="text" name="name" required>
+                  <input type="file" name="image" required>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+              
+                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal ends  -->
+
+
+        <div class="hisposts">
+          <div class="container">
+            {% for i in allStory %}
+              <div class="post">
+                <div class="postBody">
+                  <div style="font-weight: bolder; min-height: 50px;"> {{i.question|truncatechars:100}} </div>
+                  <div> {{i.answer|truncatechars:200}} </div>
+                </div>
+                <div class="postFooter">
+                  <a type="button" href="{% url 'userStory' i.id %}">see this post</a>
+                </div>
+              </div>
+            {% endfor %}
+
+          
+          </div>
+        </div>
+
+{% endblock %}
