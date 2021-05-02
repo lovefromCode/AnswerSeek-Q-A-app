@@ -193,25 +193,21 @@
 
 
 
+            <!-- recommendations  -->
+            <div class="recommendations">
+              <h4> Recommended Posts </h4> 
 
-              <div class="recommendations">
-                <h3> Recommended Posts </h3> 
-
-                  <div class="post">
-                    <div class="postBody">
-                      <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
-                      <button>see post</button>
-                    </div>
+              {% for r in grandFinal %}
+                <div class="post">
+                  <div class="postBody">
+                    <div style="font-weight: bolder;"> Question: {{r}} ? </div>
+                    <!-- <button>see post</button> -->
                   </div>
-                
-                  <div class="post">
-                    <div class="postBody">
-                      <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
-                      <button>see post</button>
-                    </div>
-                  </div>
+                </div>
+              
+               {% endfor %}
+            </div>
 
-              </div>
          </div>
        </div>
               

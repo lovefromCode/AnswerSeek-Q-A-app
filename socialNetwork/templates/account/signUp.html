@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="body_signup">
-    <div class="logo">AnswerSeek</div>
+    <div class="logo"> <i style="padding-right: 15px;" class="fas fa-brain"></i> AnswerSeek</div>
     <form class="signup__form" method="POST" action="{% url 'signup' %}">
         {% csrf_token %}
         <div>

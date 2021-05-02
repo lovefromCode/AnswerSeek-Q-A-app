@@ -10,7 +10,7 @@
     <div class="section">
       <div class="section_home">
        <div class="allposts">
-        <h3>Posts</h3>
+        <h4>Posts</h4>
             {% for post in posts %}
                 <div class="post">
                   <div class="postHeader"> 
@@ -34,22 +34,17 @@
             <!-- recommendations -->
             
             <div class="recommendations">
-              <h3> Recommended Posts </h3> 
+              <h4> Recommended Posts </h4> 
 
+              {% for r in grandFinal %}
                 <div class="post">
                   <div class="postBody">
-                    <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
-                    <button>see post</button>
+                    <div style="font-weight: bolder;"> Question: {{r}} ? </div>
+                    <!-- <button>see post</button> -->
                   </div>
                 </div>
               
-                <div class="post">
-                  <div class="postBody">
-                    <div style="font-weight: bolder;"> Question: What is aws Elastic Beanstalk. how it is helpful in deploying applications ? </div>
-                    <button>see post</button>
-                  </div>
-                </div>
-
+               {% endfor %}
             </div>
       </div>      
         </div>

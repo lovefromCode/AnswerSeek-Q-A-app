@@ -6,7 +6,7 @@
   height: 55px;
 
   .navbarName {
-    width: 13%;
+    width: 17%;
     padding-left: 50px;
     a {
       text-decoration: none;
@@ -14,7 +14,7 @@
     }
   }
   .navbarSearch {
-    width: 55%;
+    width: 51%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,11 +44,17 @@
       color: #fff;
       padding: 0 20px;
     }
-    
+    .askBtn {
+      color: #fafafa;
+      font-size: 16px;
+      border: 2px solid #232f3e;
+      border-radius: 4px;
+      background: linear-gradient(#f99653, #e15500);
+    }
   }
 }
 
-@media all and (max-width: 1070px) {
+@media all and (max-width: 1085px) {
   .navbar {
     .navbarName {
       padding-left: 0;
@@ -66,7 +72,7 @@
   }
 }
 
-@media all and (max-width: 940px) {
+@media all and (max-width: 960px) {
   .navbar {
     .navbarName {
       font-size: 14px;
@@ -85,11 +91,14 @@
       a {
         padding: 0 10px;
       }
+      .askBtn {
+        font-size: 14px;
+      }
     }
   }
 }
 
-@media all and (max-width: 745px) {
+@media all and (max-width: 770px) {
   .navbar {
     .navbarName {
       width: 15%;
@@ -106,6 +115,9 @@
       font-size: 13px;
       a {
         padding: 0 10px;
+      }
+      .askBtn {
+        font-size: 14px;
       }
     }
   }

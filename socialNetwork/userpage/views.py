@@ -4,18 +4,82 @@ from django.contrib.auth.models import User
 from .models import Post, Profile
 from django.contrib import messages
 from .models import Post, Profile, StoryComment, PossibleAnswers
+import csv
+import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import linear_kernel
+import random
+
+
+#### --- for exporting data form database into csv format --- ####
+def exportData(request):
+    response = HttpResponse(content_type="text/csv")
+
+    writer = csv.writer(response)
+    writer.writerow(['UserName', 'Question', 'Answer',
+                     'Created_at', 'Likes', 'Dislikes'])
+
+    for post___ in Post.objects.all().values_list('user', 'question', 'answer', 'created_at', 'likes', 'dislikes'):
+        writer.writerow(post___)
+
+    response['Content-Disposition'] = 'attachment; filename="posts_.csv"'
+    return response
+
+# -------------------- #
 
 
 def userHome(request):
     # fetching post from database
     posts = Post.objects.order_by('-created_at').all()
+
+    all_choices = []
+    for p in posts:
+        all_choices.append(p.question)
+
+    ########## --- Machine Learning part --- ###########
+    data1 = pd.read_csv(
+        "/Users/prashantmaitra/Downloads/posts.csv", encoding='latin1')
+
+    tf = TfidfVectorizer(analyzer='word', ngram_range=(
+        1, 3), min_df=0, stop_words='english')
+
+    matrix = tf.fit_transform(data1['Answer'])
+
+    cosine_similarities = linear_kernel(matrix, matrix)
+
+    question = data1['Question']
+
+    indices = pd.Series(data1.index, index=data1['Question']).drop_duplicates()
+
+    idx = indices[random.choice(all_choices)]
+
+    sim_scores = list(enumerate(cosine_similarities[idx]))
+
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
+    sim_scores = sim_scores[1:31]
+
+    question_indices = [i[0] for i in sim_scores]
+
+    final_recommandation = question.iloc[question_indices].tolist()
+
+    grandFinal = []
+    for j in range(0, 4):
+        grandFinal.append(final_recommandation[j])
+        # print(grandFinal)
+
+    ########### ---- Recommendation ends ---- ############
     data = {
         'posts': posts,
+        'grandFinal': grandFinal,
     }
     return render(request, "userpage/homepage.html", data)
 
 
+
 def userStory(request, ID):
+    all_posts = Post.objects.order_by('-created_at').all()
     posts = Post.objects.get(pk=ID)
     answers = PossibleAnswers.objects.filter(post=posts)
     comments = StoryComment.objects.order_by('-created_at').filter(post=posts)
@@ -30,12 +94,51 @@ def userStory(request, ID):
     else:
         isDisliked = False
 
+    all_choices = []
+    for p in all_posts:
+        all_choices.append(p.question)
+
+    ########## --- Machine Learning part --- ###########
+    data1 = pd.read_csv(
+        "/Users/prashantmaitra/Downloads/posts.csv", encoding='latin1')
+
+    tf = TfidfVectorizer(analyzer='word', ngram_range=(
+        1, 3), min_df=0, stop_words='english')
+
+    matrix = tf.fit_transform(data1['Answer'])
+
+    cosine_similarities = linear_kernel(matrix, matrix)
+
+    question = data1['Question']
+
+    indices = pd.Series(data1.index, index=data1['Question']).drop_duplicates()
+
+    idx = indices[random.choice(all_choices)]
+
+    sim_scores = list(enumerate(cosine_similarities[idx]))
+
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
+    sim_scores = sim_scores[1:31]
+
+    question_indices = [i[0] for i in sim_scores]
+
+    final_recommandation = question.iloc[question_indices].tolist()
+
+    grandFinal = []
+    for j in range(0, 4):
+        grandFinal.append(final_recommandation[j])
+        # print(grandFinal)
+
+    ########### ---- Recommendation ends ---- ############
+
     data = {
         'posts': posts,
         'isLiked': isLiked,
         'isDisliked': isDisliked,
         'comments': comments,
         'answers': answers,
+        'grandFinal': grandFinal,
     }
     return render(request, 'userpage/userAnswers.html', data)
 
@@ -90,11 +193,16 @@ def postDone(request):
         question = request.POST['question']
         answer = request.POST['answer']
 
-        post_obj = Post(user=user, question=question,
-                        answer=answer)
-        post_obj.save()
-        messages.success(request, "We Showed Them!!!")
-        return redirect("/")
+        # if question has already asked.
+        if(Post.objects.filter(question=question).exists()):
+            messages.warning(request, "Question already exits. please ask another")
+            return render(request, 'userpage/postingQues.html')
+        else:
+            post_obj = Post(user=user, question=question,
+                            answer=answer)
+            post_obj.save()
+            messages.success(request, "We Showed Them!!!")
+            return redirect("/")
     else:
         messages.error(request, "Something went Wrong :(")
         return render(request, 'userpage/postingQues.html')

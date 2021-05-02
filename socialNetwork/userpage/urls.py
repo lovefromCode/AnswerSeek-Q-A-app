@@ -14,4 +14,5 @@ urlpatterns = [
     path("answer/<int:ID>", views.answerPost, name='answerPost'),
     path("profile/<str:username>", views.userProfile, name='user_profile'),
     path("editprofile/<str:username>", views.editProfile, name='editProfile'),
+    path("exportData", views.exportData, name='exportData'),
 ]

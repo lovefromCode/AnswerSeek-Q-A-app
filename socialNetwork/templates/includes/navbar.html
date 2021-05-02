@@ -1,10 +1,10 @@
 <div class="navbar">
   <div class="navbarName">
-    <a href="/">AnswerSeek</a>
+    <a href="/"> <i style="padding-right: 5px; font-size: 20px;" class="fas fa-brain"></i> AnswerSeek</a>
   </div>
 
     <form class="navbarSearch" method="GET" action="{% url 'searchPost' %}">
-      <input name="qr" placeholder="Search">
+      <input name="qr" placeholder="Search" required>
       <button type="submit">Search</button>
     </form>
 
@@ -16,7 +16,7 @@
       <a href="{% url 'signin' %}">login</a>
       <a href="{% url 'signup' %}">sign up</a>
     {% endif %}
-      <a href="{% url 'post' %}">Ask Question?</a>
+      <a class="askBtn" href="{% url 'post' %}">Ask Question?</a>
   </div>
 </div>
 
